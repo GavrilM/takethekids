@@ -1,0 +1,296 @@
+<head>
+  <title>takethekids</title>
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Oswald|Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<input type="checkbox" id="toggler">
+<div id="top-bar">
+
+    <label for="toggler">Menu</label>
+
+    <h1>Take the Kids!</h1>
+    <span id="options" >Options</span>
+</div>
+<div id="mainnav">
+    <ul>
+        <li class="nav-item" template = "dashboard">Homepage</li>
+        <li class="nav-item" template = "chat">Chat</li>
+        <li class="nav-item" template = "schedule">Schedule</li>
+        <li class="nav-item" template = "guidelines">Community</li>
+    </ul>
+</div>
+
+    <div style=" right: 50vw; position: absolute;">
+  {{> loginButtons}}
+    </div>
+  {{#if currentUser}}
+      <h1>Hello {{currentUser.username}}!</h1>
+
+
+
+      {{> Template.dynamic template = tab}}
+
+  {{else}}
+      {{> landing}}
+  {{/if}}
+</body>
+
+<template name="landing">
+    <h1>Login or Sign Up!</h1>
+
+
+</template>
+
+<template name="dashboard">
+
+    {{#if lacksinfo}}
+    {{> infoform }}
+    {{/if}}
+
+
+    {{> weekslider}}
+
+
+
+
+
+
+
+
+</template>
+
+<template name="schedule">
+    <div class="flex-container">
+    <div class="flex-container">
+        <h2>Child Care</h2>
+    <form id="needday">
+        <h4>Set Dates Needed</h4>
+        <span class="check-item"><label for="needsunday">Sunday?</label><input type="checkbox" id="needsunday"><br></span>
+        <span class="check-item"><label for="needmonday">Monday?</label><input type="checkbox" id="needmonday"><br></span>
+        <span class="check-item"><label for="needtuesday">Tuesday?</label><input type="checkbox" id="needtuesday"><br></span>
+        <span class="check-item"><label for="needwednesday">Wednesday?</label><input type="checkbox" id="needwednesday"><br></span>
+        <span class="check-item"><label for="needthursday">Thursday?</label><input type="checkbox" id="needthursday"><br></span>
+        <span class="check-item"><label for="needfriday">Friday?</label><input type="checkbox" id="needfriday"><br></span>
+        <span class="check-item"><label for="needsaturday">Saturday?</label><input type="checkbox" id="needsaturday"><br></span>
+        <input type="submit">
+
+    </form>
+
+    <form id="setday">
+        <h4>Set Dates Available</h4>
+        <span class="check-item"><label for="setsunday">Sunday?</label><input type="checkbox" id="setsunday"><br></span>
+        <span class="check-item"><label for="setmonday">Monday?</label><input type="checkbox" id="setmonday"><br></span>
+        <span class="check-item"><label for="settuesday">Tuesday?</label><input type="checkbox" id="settuesday"><br></span>
+        <span class="check-item"><label for="setwednesday">Wednesday?</label><input type="checkbox" id="setwednesday"><br></span>
+        <span class="check-item"><label for="setthursday">Thursday?</label><input type="checkbox" id="setthursday"><br></span>
+        <span class="check-item"><label for="setfriday">Friday?</label><input type="checkbox" id="setfriday"><br></span>
+        <span class="check-item"><label for="setsaturday">Saturday?</label><input type="checkbox" id="setsaturday"><br></span>
+        <input type="submit">
+
+    </form>
+    </div>
+        <div class="flex-container">
+            <form id="needride">
+                <h2>Rideshare</h2>
+                <h4>Set Dates Needed</h4>
+                <span class="check-item"><label for="needridesunday">Sunday?</label><input type="checkbox" id="needridesunday"><br></span>
+                <span class="check-item"><label for="needridemonday">Monday?</label><input type="checkbox" id="needridemonday"><br></span>
+                <span class="check-item"><label for="needridetuesday">Tuesday?</label><input type="checkbox" id="needridetuesday"><br></span>
+                <span class="check-item"><label for="needridewednesday">Wednesday?</label><input type="checkbox" id="needridewednesday"><br></span>
+                <span class="check-item"><label for="needridethursday">Thursday?</label><input type="checkbox" id="needridethursday"><br></span>
+                <span class="check-item"><label for="needridefriday">Friday?</label><input type="checkbox" id="needridefriday"><br></span>
+                <span class="check-item"><label for="needridesaturday">Saturday?</label><input type="checkbox" id="needridesaturday"><br></span>
+                <input type="submit">
+
+            </form>
+
+            <form id="setride">
+                <h4>Set Dates Available</h4>
+                <span class="check-item"><label for="setridesunday">Sunday?</label><input type="checkbox" id="setridesunday"><br></span>
+                <span class="check-item"><label for="setridemonday">Monday?</label><input type="checkbox" id="setridemonday"><br></span>
+                <span class="check-item"><label for="setridetuesday">Tuesday?</label><input type="checkbox" id="setridetuesday"><br></span>
+                <span class="check-item"><label for="setridewednesday">Wednesday?</label><input type="checkbox" id="setridewednesday"><br></span>
+                <span class="check-item"><label for="setridethursday">Thursday?</label><input type="checkbox" id="setridethursday"><br></span>
+                <span class="check-item"><label for="setridefriday">Friday?</label><input type="checkbox" id="setridefriday"><br></span>
+                <span class="check-item"><label for="setridesaturday">Saturday?</label><input type="checkbox" id="setridesaturday"><br></span>
+                <input type="submit">
+
+            </form>
+        </div>
+    </div>
+
+</template>
+
+<template name="chat">
+    {{> chatRoom}}
+</template>
+
+<template name="guidelines">
+
+</template>
+
+<template name="options">
+    <div class="flex-container">
+
+
+        <div>{{> infoform}}</div>
+
+        {{> addChildren}}
+
+        {{> creategroup}}
+
+    </div>
+</template>
+
+<template name="infoform">
+    <h3>Give us some info!</h3>
+    <form name="userinfo" id="userinfo">
+
+        <input type="text" name="name" required placeholder="Name?" value="{{#if currentUser.username}}{{currentUser.username}}{{/if}}">
+        <input type="text" name="city" placeholder="City?" value="{{#if currentUser.location.city}}{{currentUser.location.city}}{{/if}}">
+        <input type="text" name="street" placeholder="Street?" value="{{#if currentUser.location.street}}{{currentUser.location.street}}{{/if}}">
+        <input type="text" name="groupname" placeholder="Community?" value="{{#if currentUser.groupname}}{{currentUser.groupname}}{{/if}}">
+        <p>If you dont know what this is, leave it blank.</p>
+        <input type="number" name="fees" placeholder="Charge for Sitting?" value="{{#if currentUser.fees}}{{currentUser.fees}}{{/if}}">
+        <input type="submit">
+    </form>
+</template>
+
+
+<template name="creategroup">
+    <h3>Create a Community</h3>
+    <form id="creategroup" name="creategroup">
+        <input type="text" name="name" placeholder="Name?">
+        <input type="text" name="city" placeholder="City?">
+
+        <input type="submit">
+    </form>
+</template>
+
+<template name="addChildren">
+    Add a child?
+    <form id="addkids">
+        <input type="text" name="childname">
+        <input type="text" name="childage">
+        <textarea id="other" name="extra"></textarea>
+        <input type="submit">
+    </form>
+
+
+</template>
+
+<template name="addSpecial">
+   Special Dates
+    <form id="addDate">
+        <input type="month" name="month">
+        <input type="number" name="date" max="31">
+        <input type="number" min="2015" >
+        <input type="submit">
+    </form>
+</template>
+
+<template name="weekslider">
+    <section class="section-container" id="slideweek">
+        <div class="tabs">
+            <div class="tab-left  active">Care</div>
+            <div class="tab-right">Rides</div>
+        </div>
+        <div class="slider-container">
+            <div class="slide-left">&#60;</div>
+            <div class="slide-right slide-active">&#62;</div>
+            <div class="slider-content" current=0 max=7>
+                <div class="slider-item" id="">
+                    <h1>Monday</h1><br>
+                    <h3>Caretaker: {{ personcare 1 }}</h3>
+                    <h3>Fees: ${{cost 1}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 1}}</h4>
+                    <h4> Backups {{othercare 1 }}</h4>
+                </div>
+                <div class="slider-item" id="">
+
+                    <h1>Tuesday </h1><br>
+                    <h3>Caretaker: {{ personcare 2 }}</h3>
+                    <h3>Fees: ${{cost 2}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 2}}</h4>
+                    <h4> Backups {{othercare 2 }}</h4>
+                </div>
+                <div class="slider-item" id="">
+
+                    <h1>Wednesday</h1><br>
+                    <h3>Caretaker: {{ personcare 3 }}</h3>
+                    <h3>Fees: ${{cost 3}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 3}}</h4>
+                    <h4> Backups {{othercare 3 }}</h4>
+
+                           
+                </div>
+                <div class="slider-item" id="">
+
+                    <h1>Thursday</h1><br>
+                    <h3>Caretaker: {{ personcare 4 }}</h3>
+                    <h3>Fees: ${{cost 4}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 4}}</h4>
+                    <h4> Backups {{othercare 4 }}</h4>
+
+                           
+                </div>
+                <div class="slider-item" id="">
+
+                    <h1>Friday</h1><br>
+                    <h3>Caretaker: {{ personcare 5 }}</h3>
+                    <h3>Fees: ${{cost 5}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 5}}</h4>
+                    <h4> Backups {{othercare 5 }}</h4>
+
+                           
+                </div>
+                <div class="slider-item" id="">
+
+                    <h1>Saturday</h1><br>
+                    <h3>Caretaker: {{ personcare 6 }}</h3>
+                    <h3>Fees: ${{cost 6}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 6}}</h4>
+                    <h4> Backups {{othercare 6 }}</h4>
+
+                           
+                </div>
+
+                <div class="slider-item" id="">
+
+                    <h1>Sunday</h1><br>
+                    <h3>Caretaker: {{ personcare 0 }}</h3>
+                    <h3>Fees: ${{cost 0}} per child</h3>
+                    <h4>Amount of Children: {{numchildren 0}}</h4>
+                    <h4> Backups {{othercare 0 }}</h4>
+
+                           
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template name="chatRoom">
+    <form class="chatter">
+        <input type="text" name="say">
+        <button type="submit">Send!</button>
+    </form>
+
+    <button name = "clear" class="clearer">Clear </button>
+    <div class="stuffing">
+        {{#each said}}
+            {{> shesaid}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="shesaid">
+    <blockquote class="saying">
+        {{quote}}
+    </blockquote>
+    <i>said by {{person}}</i>
+</template>
+
