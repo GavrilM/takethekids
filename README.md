@@ -1,2 +1,2 @@
 # takethekids
-Web app for WeHack hackthon
+Web app to allow parents to share the load of childcare.
